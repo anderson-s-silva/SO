@@ -27,7 +27,7 @@ void handler2(int signum) {
   if (cont == 3) {
     alarm(20);
     printf("deseja sair do programa?\n(Y/N)\n");
-    scanf("%c", &escolha);
+     read(0, &escolha, 1);
 
     if (escolha == 'Y' || escolha == 'y') {
       exit(0);
