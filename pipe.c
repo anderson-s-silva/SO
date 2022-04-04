@@ -5,8 +5,9 @@
 #include <stdlib.h>
 
 void main(){
-	int pid, pip[2], status, size;
+	int pid, pip[2], pip2[2],status, size;
 	pipe(pip);
+	pipe(pip2);
 	
 	pid = fork();
 	
@@ -16,10 +17,15 @@ void main(){
 		char *msg = "O loco tá pegando fogo bicho";
 		size = strlen(msg);
 		write(pip[1], msg, size);
+		write(pip2[1], &size, sizeof(size));
 	}else{
-		char buffer[1024];
+		int tamanho;
 		wait(&status);
-		read(pip[0], buffer, 1024); //processos nao compartilha dados
-		printf("%s Chama o bombeiro lá\n\n", buffer);
+		read(pip2[0], &tamanho, sizeof(tamanho));
+		char buffer[tamanho];
+		read(pip[0], buffer, tamanho); //processos nao compartilha dados
+		
+
+		printf("%s Chama o bombeiro lá\n\ntamanho -> %d\n\n", buffer, tamanho);
 	}
 }
