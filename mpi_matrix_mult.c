@@ -53,7 +53,7 @@ int main(int argc, char **argv){
 
 	linhas = SIZE/nprocess;  //tamanho de bloco
 	mtype = FROM_MASTER; // = 1
-
+	/*---------------------------- gerente------------------------------*/
 	if (id == 0) {
 		/*Inicializacao*/
 		printf("Tamanho = %d, numero de nos = %d\n", SIZE, nprocess);
